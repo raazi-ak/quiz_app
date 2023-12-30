@@ -11,17 +11,19 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget? activeScreen;
+  // Widget? activeScreen;
 
-  @override
-  void initState() {
-    activeScreen = ImageContainer(switchScreen);
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   activeScreen = ImageContainer(switchScreen);
+  //   super.initState();
+  // }
+  // or you can use
+  var activeScreen = 'start-screen';
 
   void switchScreen() {
     setState(() {
-      activeScreen = const QuestionsScreen();
+      activeScreen = 'questions-screen';
     });
   }
 
@@ -40,7 +42,11 @@ class _QuizState extends State<Quiz> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: activeScreen,
+          child: activeScreen == 'start-screen'
+              ? ImageContainer(switchScreen)
+              : const QuestionsScreen(),
+          // just have a ternary operator to check if the activeScreen is
+          // equal to start-screen then show the ImageContainer else show the QuestionsScreen
         ),
       ),
     );
